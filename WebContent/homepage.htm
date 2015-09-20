@@ -1,0 +1,231 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+<script type="text/javascript">
+
+var slideimages = new Array() // create new array to preload images
+slideimages[0] = new Image() // create new instance of image object
+slideimages[0].src = "img/Book_garden.jpg" // set image src property to image path, preloading image in the process
+slideimages[1] = new Image()
+slideimages[1].src = "img/BMW-RR.jpg"
+slideimages[2] = new Image()
+slideimages[2].src = "img/Ducati-1098.jpg"
+slideimages[3].src="img/ducati-diavel-carbon.jpg"
+slideimages[3]=new Image();
+
+</script>
+
+<style>
+	.modalDialog {
+		position: fixed;
+		font-family: Arial, Helvetica, sans-serif;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: rgba(0,0,0,0.8);
+		z-index: 99999;
+		opacity:0;
+		-webkit-transition: opacity 400ms ease-in;
+		-moz-transition: opacity 400ms ease-in;
+		transition: opacity 400ms ease-in;
+		pointer-events: none;
+	}
+
+	.modalDialog:target {
+		opacity:1;
+		pointer-events: auto;
+	}
+
+	.modalDialog > div {
+		width: 400px;
+		position: relative;
+		margin: 10% auto;
+		padding: 5px 20px 13px 20px;
+		border-radius: 10px;
+		background: #fff;
+		background: -moz-linear-gradient(#fff, #999);
+		background: -webkit-linear-gradient(#fff, #999);
+		background: -o-linear-gradient(#fff, #999);
+	}
+
+	.close {
+		background: #606061;
+		color: #FFFFFF;
+		line-height: 25px;
+		position: absolute;
+		right: -12px;
+		text-align: center;
+		top: -10px;
+		width: 24px;
+		text-decoration: none;
+		font-weight: bold;
+		-webkit-border-radius: 12px;
+		-moz-border-radius: 12px;
+		border-radius: 12px;
+		-moz-box-shadow: 1px 1px 3px #000;
+		-webkit-box-shadow: 1px 1px 3px #000;
+		box-shadow: 1px 1px 3px #000;
+	}
+
+	.close:hover { background: #00d9ff; }
+	</style>
+</head>
+<body font-family="Tangerine,serif"font-size="48px" bgcolor="#C8C8C8"">
+<table border="0" style width="100%" bgcolor="gray"> 
+<col align="center">
+<tr>
+<td width="20%"><a href="HomePage.htm">Home</a></td>
+<td width="35%" ><font  FACE="Tangerine,serif" SIZE=48px>Sentinel Cloud Services</font></td>
+<td width="3%">
+<a href="#Login">Login</a>
+
+<div id="Login" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<h2>Welcome Guest!</h2>
+            <p>Please enter your login and password here</p>
+			<form action="/SubsriptionSystem/SubscriptionSystemServlet"method="get" >
+			<table border="0">
+			<tr>
+			
+            <div>
+			<td>
+                <label for="login">Login</label>
+				</td>
+				<td>
+                <input type="text" id="loginID" value="" name="userID" required />
+				</td>
+            </div>
+			</tr>
+			<tr>
+            <div>
+			<td>
+                <label for="password">Password</label>
+				</td>
+				<td>
+                <input type="password" id="password" value="" required />
+				</td>
+            </div>
+			</tr>
+			<tr>
+			<td>
+			</td>
+			<td>
+            <input type="submit" value="Log In" width="50%" onsubmit="Submission()"/>
+			</form>
+			<input type="button" value="Cancel" width="50%"/>
+			</td>
+			
+			</tr>
+			</table>
+</form>
+</div>
+
+</td>
+<td width="3%""><a href="#SignUp">SignUp</a>
+<div id="SignUp" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+            <p>Please enter your details here here</p>
+			<table border="0">
+			<tr>
+			
+            <div>
+			<td>
+                <label for="FirstName">FirstName</label>
+				</td>
+				<td>
+                <input type="text" id="FirstName" value="" />
+				</td>
+            </div>
+			</tr>
+			<tr>
+            <div>
+			<td>
+                <label for="LastName">LastName</label>
+				</td>
+				<td>
+                <input type="text" id="LastName" value="" />
+				</td>
+				<td>
+				</div>
+				</tr>
+				<tr>
+				<div>
+				<td>
+                <label for="MailID">MailID</label>
+				</td>
+				<td>
+                <input type="email" id="LastName" value="" />
+				</td>
+            </div>
+			</tr>
+			<tr>
+			<div>
+				<td>
+                <label for="Password">Password</label>
+				</td>
+				<td>
+                <input type="Password" id="Password" value="" />
+				</td>
+            </div>
+			<tr>
+			<tr>
+			<div>
+				<td>
+                <label for="ConfirmPassword">ConfirmPassword</label>
+				</td>
+				<td>
+                <input type="Password" id="ConfirmPassword" value="" />
+				</td>
+            </div>
+			<tr>
+			<td>
+			</td>
+			<td>
+            <input type="button" value="SignUp" width="50%"/>
+			<input type="button" value="Cancel" width="50%"/>
+			</td>
+			
+			</tr>
+			</table>
+
+</div>
+</td>
+
+</tr>
+</table>
+<table border="0" align="center">
+<col align="center">
+<tr>
+<td>
+<img src="img/Book_garden.jpg" id="slide" width="1000" height="560" align="middle"/>
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+
+//variable that will increment through the images
+var step=0
+
+function slideit(){
+ //if browser does not support the image object, exit.
+ if (!document.images)
+  return
+ document.getElementById('slide').src = slideimages[step].src
+ if (step<2)
+  step++
+ else
+  step=0
+ //call function "slideit()" every 2.5 seconds
+ setTimeout("slideit()",2500)
+}
+
+slideit()
+
+</script>
+
+</body>
+</html>
